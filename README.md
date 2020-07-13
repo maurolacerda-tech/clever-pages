@@ -1,5 +1,5 @@
 # clever-pages
 Módulo de criação de páginas do CMS da cleverweb.com.br
 
-##Instalação
+## Instalação
 composer require maurolacerda-tech/clever-pages:dev-master
