@@ -7,5 +7,19 @@
             "email": "contato@maurolacerda.com.br"
         }
     ],
-    "require": {}
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Pages\\": "./"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Pages\\Providers\\PageServiceProvider"
+            ]
+        }
+    }
 }
