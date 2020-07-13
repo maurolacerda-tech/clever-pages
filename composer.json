@@ -1,0 +1,11 @@
+{
+    "name": "maurolacerda-tech/clever-pages",
+    "description": "Módulo de criação de páginas do CMS da cleverweb.com.br",
+    "authors": [
+        {
+            "name": "maurolacerda-tech",
+            "email": "contato@maurolacerda.com.br"
+        }
+    ],
+    "require": {}
+}
