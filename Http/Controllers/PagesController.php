@@ -30,7 +30,7 @@ class PagesController extends Controller
         if(!is_null($this->menu_id)){
             $page = Page::where('menu_id', $this->menu_id)->first();
             if(!$page)
-                $page = new stdClass;
+                $page = new \stdClass;
             return view('Page::index', compact('page'));            
         }else{
             abort(403, 'Página não encontrada');
