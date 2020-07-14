@@ -31,7 +31,7 @@ class PageServiceProvider extends ServiceProvider
     {
         
         $this->mergeConfigFrom(
-            __DIR__.'/../config/pages.php',
+            __DIR__.'/../Config/pages.php',
             'pages'
         );
         
