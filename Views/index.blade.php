@@ -46,8 +46,8 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            {{ Form::label('name', 'Título') }} <code>*</code>
-                            {{ Form::text('name', null, ['class' => $errors->has('name') ?  'form-control is-invalid' : 'form-control', 'onkeyup' => "slugGenerate(this,'Modules\Pages\Models\Page')"]) }}
+                            {{ Form::label('name', 'Título') }}
+                            {{ Form::text('name', null, ['class' => $errors->has('name') ?  'form-control is-invalid' : 'form-control', 'onkeyup' => "slugGenerate(this,'Modules\\Pages\\Models\\Page')"]) }}
                             @include('admin.partials._help_block',['field' => 'name'])
                         </div>
                     </div>
@@ -78,18 +78,18 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            {{ Form::label('seo_title', 'Title') }} 
-                            {{ Form::text('seo_title', null, ['class' => $errors->has('seo_title') ?  'form-control is-invalid' : 'form-control']) }}
-                            @include('admin.partials._help_block',['field' => 'seo_title'])
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
                             {{ Form::label('slug', 'URL Amigável', ['class' => 'form-label']) }} 
                             {{ Form::text('slug', null, ['class' => $errors->has('slug') ?  'form-control is-invalid' : 'form-control']) }}                            
                             @include('admin.partials._help_block',['field' => 'slug'])
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {{ Form::label('seo_title', 'Title') }} 
+                            {{ Form::text('seo_title', null, ['class' => $errors->has('seo_title') ?  'form-control is-invalid' : 'form-control']) }}
+                            @include('admin.partials._help_block',['field' => 'seo_title'])
+                        </div>
+                    </div>                    
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
