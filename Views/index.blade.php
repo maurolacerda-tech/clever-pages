@@ -30,21 +30,24 @@
 
 <div class="row clearfix">
     <div class="card table-card">             
-        <div class="card-block">
+        <div class="card-body">
             <form method="post" action="/panel/{{$slug}}/store">
                 @csrf
 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="form-group">
                             {{ Form::label('image', 'Imagem') }}
                             <input type="file" name="image" class="dropify" @if(isset($page->image)) data-default-file="{{ url("storage/pages/".$page->image) }}"@endif data-height="150" data-max-file-size="2M" data-allowed-file-extensions="jpg png jpeg"  />
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
                         <div class="form-group">
                             {{ Form::label('name', 'Título') }} <code>*</code>
-                            {{ Form::text('name', null, ['class' => $errors->has('name') ?  'form-control is-invalid' : 'form-control']) }}
+                            {{ Form::text('name', null, ['class' => $errors->has('name') ?  'form-control is-invalid' : 'form-control', 'onkeyup' => "slugGenerate(this,'Modules\Pages\Models\Page')"]) }}
                             @include('admin.partials._help_block',['field' => 'name'])
                         </div>
                     </div>
@@ -64,7 +67,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             {{ Form::label('body', 'Descrição') }}
-                            {{ Form::textarea('body', null, ['class' => $errors->has('body') ?  'form-control is-invalid' : 'form-control']) }}
+                            {{ Form::textarea('body', null, ['class' => $errors->has('body') ?  'form-control is-invalid html-editor' : 'form-control html-editor']) }}
                             @include('admin.partials._help_block',['field' => 'body'])
                         </div>
                     </div>
@@ -76,7 +79,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             {{ Form::label('seo_title', 'Title') }} 
-                            {{ Form::text('seo_title', null, ['class' => $errors->has('seo_title') ?  'form-control is-invalid' : 'form-control', 'onkeyup' => "slugGenerate(this,'Modules\Pages\Models\Page')"]) }}
+                            {{ Form::text('seo_title', null, ['class' => $errors->has('seo_title') ?  'form-control is-invalid' : 'form-control']) }}
                             @include('admin.partials._help_block',['field' => 'seo_title'])
                         </div>
                     </div>
@@ -101,7 +104,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             {{ Form::label('meta_keywords', 'Meta Keywords') }} <p>Para adicionar o próximo item use a tecla <code>enter</code> ou <code>,</code> </p>
-                            {{ Form::text('meta_keywords', null, ['class' => $errors->has('meta_keywords') ?  'form-control tokenfield is-invalid' : 'form-control tokenfield']) }}
+                            {{ Form::text('meta_keywords', null, ['class' => $errors->has('meta_keywords') ?  'form-control tags is-invalid ' : 'form-control tags']) }}
                             @include('admin.partials._help_block',['field' => 'meta_keywords'])
                         </div>
                     </div>
