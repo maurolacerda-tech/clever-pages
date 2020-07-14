@@ -17,7 +17,8 @@ Route::prefix('panel')->middleware('auth')->group(function () {
                 $actions_item_array = explode(';',$actions_item);
                 $verb = $actions_item_array[0];
                 $method = $actions_item_array[1];
-                Route::$verb($menu_item->slug, "PagesController@$method");
+                $url = isset($actions_item_array[2]) ? '/'.$actions_item_array[2] : '' ;
+                Route::$verb($menu_item->slug.$url, "PagesController@$method");
             }        
     }
     //Route::get('page', 'PagesController@index');
