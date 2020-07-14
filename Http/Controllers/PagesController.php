@@ -83,30 +83,26 @@ class PagesController extends Controller
         if(is_null($id)){
             return $this->validate($request, [
                 'name' => 'required|max:191',
-                'slug' => 'required|max:191|unique:brands',
-                'status' => 'required',
-                'image' => 'required',
-                'categories' => 'nullable',
+                'slug' => 'required|max:191|unique:pages',
+                'image' => 'nullable',
                 'summary' => 'nullable',
-                'description' => 'nullable',
+                'body' => 'nullable',
                 'seo_title' => 'nullable|max:90',
                 'meta_description' => 'nullable|max:255',
                 'meta_keywords' => 'nullable|max:255',
-                'order' => 'nullable|numeric'
+                'more_images' => 'nullable'
             ]);
         }else{
             return $this->validate($request, [
                 'name' => 'required|max:191',
-                'slug' => "required|max:191|unique:brands,slug,{$id},id",
-                'status' => 'required',
+                'slug' => "required|max:191|unique:pages,slug,{$id},id",
                 'image' => 'nullable',
-                'categories' => 'nullable',
                 'summary' => 'nullable',
-                'description' => 'nullable',
+                'body' => 'nullable',
                 'seo_title' => 'nullable|max:90',
                 'meta_description' => 'nullable|max:255',
                 'meta_keywords' => 'nullable|max:255',
-                'order' => 'nullable|numeric'
+                'more_images' => 'nullable'
             ]);
         }
     }

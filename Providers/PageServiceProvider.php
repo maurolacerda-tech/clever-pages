@@ -21,19 +21,19 @@ class PageServiceProvider extends ServiceProvider
                 __DIR__.'/../Views' => resource_path('views/vendor/Page'),
             ], 'views');
 
-            /*
+            
             $this->publishes([
                 __DIR__.'/../Config/pages.php' => config_path('pages.php'),
             ], 'config');
-            */
+            
     }
     public function register()
     {
-        /*
+        
         $this->mergeConfigFrom(
             __DIR__.'/../config/pages.php',
             'pages'
         );
-        */
+        
     }
 }
