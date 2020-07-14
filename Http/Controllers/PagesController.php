@@ -13,11 +13,13 @@ use Modules\Pages\Models\Page;
 class PagesController extends Controller
 {
     protected $menu_id;
+    protected $slug;
 
     public function __construct()
     {
         $slug = Functions::get_menuslug();
         $menu = Menu::where('slug',$slug)->first();
+        $this->slug = $slug;
         if($menu)
             $this->menu_id = $menu->id;
         else
@@ -26,12 +28,13 @@ class PagesController extends Controller
     }   
 
     public function index()
-    {        
+    {  
+        $slug = $this->slug;      
         if(!is_null($this->menu_id)){
             $page = Page::where('menu_id', $this->menu_id)->first();
             if(!$page)
                 $page = new \stdClass;
-            return view('Page::index', compact('page'));            
+            return view('Page::index', compact('page', 'slug'));            
         }else{
             abort(403, 'Página não encontrada');
         }
@@ -54,6 +57,7 @@ class PagesController extends Controller
             }else{
                 $data = $this->_validate($request);
                 $data['image'] = _uploadImage($request);
+                $data['menu_id'] = $this->menu_id;
                 Page::create($data);
             }
             return redirect()->back()->with('success','Página atualizada com sucesso!');    
