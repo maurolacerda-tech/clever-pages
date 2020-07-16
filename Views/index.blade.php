@@ -31,7 +31,7 @@
 <div class="row clearfix">
     <div class="card table-card">             
         <div class="card-body">
-            <form method="post" action="/panel/{{$slug}}">
+            <form method="post" action="/panel/{{$slug}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row">
