@@ -73,6 +73,16 @@
                     </div>
                 </div>
 
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            {{ Form::label('more_images', 'Imagens adicionais') }}
+                            <input type="file" name="more_images[]" class="multiple_images"  />
+                        </div>
+                    </div>
+                </div>
+
                 <h6>Meta Tags</h6>
 
                 <div class="row">
@@ -117,4 +127,14 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+
+@section('scriptjs')
+<script>
+    $(document).ready(function() {
+        carregaMultiplasImages();
+    });
+</script>
 @endsection

@@ -52,12 +52,21 @@ class PagesController extends Controller
             $page = Page::where('menu_id', $this->menu_id)->first();
             if($page){
                 $data = $this->_validate($request, $page->id);
-                $data['image'] = _uploadImage($request, $page->image);
+
+                if(isset($request->image))
+                    $data['image'] = _uploadImage($request, $page->image);
+
+                if(isset($request->more_images))
+                    $data['more_images'] = _uploadMultImage($request);
+
                 $page->fill($data);
                 $page->save();
             }else{
                 $data = $this->_validate($request);
+
                 $data['image'] = _uploadImage($request);
+                $data['more_images'] = _uploadMultImage($request);
+
                 $data['menu_id'] = $this->menu_id;
                 Page::create($data);
             }
@@ -68,12 +77,28 @@ class PagesController extends Controller
 
     }
 
-    protected function _uploadImage(Request $request, $nameImage = null){
-        if($request->image){           
+    protected function _uploadMultImage(Request $request)
+    {
+        if(isset($request->more_images)){
+            $responseUpload = \Upload::imageMultPublic($request, 'more_images', 'pages', 'peq,150,150;med,480,480');
+            if(count($responseUpload) > 0){
+                return implode(',',$responseUpload);
+            }
+            return null;
+        }else{
+            return null;
+        }
+    }
+
+    protected function _uploadImage(Request $request, $nameImage = null)
+    {
+        if(isset($request->image)){           
             $responseUpload = \Upload::imagePublic($request, 'image', 'pages', 'peq,150,150;med,480,480', $nameImage);
             if($responseUpload->original['success']){
                 return $responseUpload->original['file'];
             }
+            return null;
+        }else{
             return null;
         }
     }
