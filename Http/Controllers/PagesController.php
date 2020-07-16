@@ -115,7 +115,8 @@ class PagesController extends Controller
                 'seo_title' => 'nullable|max:90',
                 'meta_description' => 'nullable|max:255',
                 'meta_keywords' => 'nullable|max:255',
-                'more_images' => 'nullable'
+                'more_images' => 'nullable',
+                'menu_id' => 'nullable'
             ]);
         }else{
             return $this->validate($request, [
@@ -127,7 +128,8 @@ class PagesController extends Controller
                 'seo_title' => 'nullable|max:90',
                 'meta_description' => 'nullable|max:255',
                 'meta_keywords' => 'nullable|max:255',
-                'more_images' => 'nullable'
+                'more_images' => 'nullable',
+                'menu_id' => 'nullable'
             ]);
         }
     }
