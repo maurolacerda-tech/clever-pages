@@ -47,7 +47,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             {{ Form::label('name', 'Título') }}
-                            {{ Form::text('name', null, ['class' => $errors->has('name') ?  'form-control is-invalid' : 'form-control', 'onkeyup' => "slugGenerate(this,'Modules\\Pages\\Models\\Page')"]) }}
+                            {{ Form::text('name', null, ['class' => $errors->has('name') ?  'form-control is-invalid' : 'form-control', 'onkeyup' => "slugGenerate(this,'Modules\\\Pages\\\Models\\\Page')"]) }}
                             @include('admin.partials._help_block',['field' => 'name'])
                         </div>
                     </div>
