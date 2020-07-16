@@ -31,7 +31,7 @@
 <div class="row clearfix">
     <div class="card table-card">             
         <div class="card-body">
-            <form method="post" action="/panel/{{$slug}}" enctype="multipart/form-data">
+                {{ Form::model($page, ['url' => ['//panel//'.$slug], 'method' => 'POST', 'files' => true ]) }}
                 @csrf
 
                 <div class="row">
@@ -119,11 +119,8 @@
                         </div>
                     </div>
                 </div>
-
-
-
                 <button type="submit" class="btn btn-primary">Salvar</button>
-            </form>
+            {{ Form::close() }}
         </div>
     </div>
 </div>
