@@ -54,18 +54,18 @@ class PagesController extends Controller
                 $data = $this->_validate($request, $page->id);
 
                 if(isset($request->image))
-                    $data['image'] = _uploadImage($request, $page->image);
+                    $data['image'] = $this->_uploadImage($request, $page->image);
 
                 if(isset($request->more_images))
-                    $data['more_images'] = _uploadMultImage($request);
+                    $data['more_images'] = $this->_uploadMultImage($request);
 
                 $page->fill($data);
                 $page->save();
             }else{
                 $data = $this->_validate($request);
 
-                $data['image'] = _uploadImage($request);
-                $data['more_images'] = _uploadMultImage($request);
+                $data['image'] = $this->_uploadImage($request);
+                $data['more_images'] = $this->_uploadMultImage($request);
 
                 $data['menu_id'] = $this->menu_id;
                 Page::create($data);
