@@ -94,54 +94,55 @@
                 </div>
                 @endisset
 
-                <h6>Meta Tags</h6>
+                @if (isset($combine_filds['slug']) || isset($combine_filds['seo_title']) || isset($combine_filds['meta_description']) || isset($combine_filds['meta_keywords']) )
+                    <h6>Meta Tags</h6>
+                    <div class="row">
+                        @isset ($combine_filds['slug'])
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ Form::label('slug', $combine_filds['slug'], ['class' => 'form-label']) }} 
+                                {{ Form::text('slug', null, ['class' => $errors->has('slug') ?  'form-control is-invalid' : 'form-control']) }}                            
+                                @include('admin.partials._help_block',['field' => 'slug'])
+                            </div>
+                        </div>
+                        @endisset
 
-                <div class="row">
-                    @isset ($combine_filds['slug'])
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            {{ Form::label('slug', $combine_filds['slug'], ['class' => 'form-label']) }} 
-                            {{ Form::text('slug', null, ['class' => $errors->has('slug') ?  'form-control is-invalid' : 'form-control']) }}                            
-                            @include('admin.partials._help_block',['field' => 'slug'])
+                        @isset ($combine_filds['seo_title'])
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ Form::label('seo_title', $combine_filds['seo_title']) }} 
+                                {{ Form::text('seo_title', null, ['class' => $errors->has('seo_title') ?  'form-control is-invalid' : 'form-control']) }}
+                                @include('admin.partials._help_block',['field' => 'seo_title'])
+                            </div>
+                        </div>
+                        @endisset
+
+                    </div>
+
+                    @isset ($combine_filds['meta_description'])
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                {{ Form::label('meta_description', $combine_filds['meta_description']) }} 
+                                {{ Form::text('meta_description', null, ['class' => $errors->has('meta_description') ?  'form-control is-invalid' : 'form-control']) }}
+                                @include('admin.partials._help_block',['field' => 'meta_description'])
+                            </div>
                         </div>
                     </div>
                     @endisset
 
-                    @isset ($combine_filds['seo_title'])
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            {{ Form::label('seo_title', $combine_filds['seo_title']) }} 
-                            {{ Form::text('seo_title', null, ['class' => $errors->has('seo_title') ?  'form-control is-invalid' : 'form-control']) }}
-                            @include('admin.partials._help_block',['field' => 'seo_title'])
+                    @isset ($combine_filds['meta_keywords'])
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                {{ Form::label('meta_keywords', $combine_filds['meta_keywords']) }} <p>Para adicionar o próximo item use a tecla <code>enter</code> ou <code>,</code> </p>
+                                {{ Form::text('meta_keywords', null, ['class' => $errors->has('meta_keywords') ?  'form-control tags is-invalid ' : 'form-control tags']) }}
+                                @include('admin.partials._help_block',['field' => 'meta_keywords'])
+                            </div>
                         </div>
                     </div>
                     @endisset
-
-                </div>
-
-                @isset ($combine_filds['meta_description'])
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            {{ Form::label('meta_description', $combine_filds['meta_description']) }} 
-                            {{ Form::text('meta_description', null, ['class' => $errors->has('meta_description') ?  'form-control is-invalid' : 'form-control']) }}
-                            @include('admin.partials._help_block',['field' => 'meta_description'])
-                        </div>
-                    </div>
-                </div>
-                @endisset
-
-                @isset ($combine_filds['meta_keywords'])
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            {{ Form::label('meta_keywords', $combine_filds['meta_keywords']) }} <p>Para adicionar o próximo item use a tecla <code>enter</code> ou <code>,</code> </p>
-                            {{ Form::text('meta_keywords', null, ['class' => $errors->has('meta_keywords') ?  'form-control tags is-invalid ' : 'form-control tags']) }}
-                            @include('admin.partials._help_block',['field' => 'meta_keywords'])
-                        </div>
-                    </div>
-                </div>
-                @endisset
+                @endif
                 <button type="submit" class="btn btn-primary">Salvar</button>
             {{ Form::close() }}
         </div>
