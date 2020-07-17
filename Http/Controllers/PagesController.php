@@ -15,28 +15,39 @@ class PagesController extends Controller
 {
     protected $menu_id;
     protected $slug;
+    protected $folder;
+    protected $resize;
+    protected $combine_filds;
 
     public function __construct()
     {
         $slug = Functions::get_menuslug();
         $menu = Menu::where('slug',$slug)->first();
         $this->slug = $slug;
-        if($menu)
+        $this->folder = config('pages.folder');
+        $this->resize = config('pages.resize');
+        if($menu){
             $this->menu_id = $menu->id;
-        else
-            $this->menu_id = null;
+            $keysFilds = $menu->fields_active;
+            $titlesFilds = $menu->fields_title;
+            $combineFilds = array_combine($keysFilds, $titlesFilds);
+            $this->combine_filds = $combineFilds;
 
+        }else{
+            $this->menu_id = null;
+        }
     }   
 
     public function index()
     {  
+        $combine_filds = $this->combine_filds;
         $images_more = '';        
         $slug = $this->slug;      
         if(!is_null($this->menu_id)){
             $page = Page::where('menu_id', $this->menu_id)->first();
             if(!$page)
                 $page = new \stdClass;
-            return view('Page::index', compact('page', 'slug'));            
+            return view('Page::index', compact('page', 'slug', 'combine_filds'));            
         }else{
             abort(403, 'Página não encontrada');
         }
@@ -102,7 +113,7 @@ class PagesController extends Controller
     protected function _uploadMultImage(Request $request)
     {
         if(isset($request->more_images)){
-            $responseUpload = \Upload::imageMultPublic($request, 'more_images', 'pages', 'peq,150,150;med,480,480');
+            $responseUpload = \Upload::imageMultPublic($request, 'more_images', $this->folder, $this->resize);
             if(count($responseUpload) > 0){
                 return implode(',',$responseUpload);
             }
@@ -115,7 +126,7 @@ class PagesController extends Controller
     protected function _uploadImage(Request $request, $nameImage = null)
     {
         if(isset($request->image)){           
-            $responseUpload = \Upload::imagePublic($request, 'image', 'pages', 'peq,150,150;med,480,480', $nameImage);
+            $responseUpload = \Upload::imagePublic($request, 'image', $this->folder, $this->resize, $nameImage);
             if($responseUpload->original['success']){
                 return $responseUpload->original['file'];
             }
