@@ -153,9 +153,12 @@
 
 @section('scriptjs')
     @isset ($combine_filds['more_images'])
+        @php
+            $more_images_json = isset($page->more_images_json) ? $page->more_images_json : '';
+        @endphp
         <script>
             $(document).ready(function() {
-                carregaMultiplasImages( {!! $page->more_images_json !!} );
+                carregaMultiplasImages( {!! $more_images_json !!} );
             });
         </script>
     @endisset
