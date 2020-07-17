@@ -28,8 +28,8 @@ class PagesController extends Controller
         $this->resize = config('pages.resize');
         if($menu){
             $this->menu_id = $menu->id;
-            $keysFilds = $menu->fields_active;
-            $titlesFilds = $menu->fields_title;
+            $keysFilds = explode(',',$menu->fields_active);
+            $titlesFilds = explode(',',$menu->fields_title);
             $combineFilds = array_combine($keysFilds, $titlesFilds);
             $this->combine_filds = $combineFilds;
 
