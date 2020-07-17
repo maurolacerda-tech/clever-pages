@@ -30,6 +30,7 @@ class PagesController extends Controller
 
     public function index()
     {  
+        $images_more = '';        
         $slug = $this->slug;      
         if(!is_null($this->menu_id)){
             $page = Page::where('menu_id', $this->menu_id)->first();
@@ -56,8 +57,16 @@ class PagesController extends Controller
                 if(isset($request->image))
                     $data['image'] = $this->_uploadImage($request, $page->image);
 
+                $images_restantes = !is_null($page->more_images) ? $page->more_images.',' : '';
+                if(isset($request->image_remove) && !empty($request->image_remove) ){
+                    $images_restantes = $this->_removeImage($request->image_remove, $page->more_images );
+                } 
+
                 if(isset($request->more_images))
-                    $data['more_images'] = $this->_uploadMultImage($request);
+                    $data['more_images'] = $images_restantes.$this->_uploadMultImage($request);
+                elseif(!isset($request->more_images) && $images_restantes!='')
+                    $data['more_images'] = $images_restantes;
+
 
                 $page->fill($data);
                 $page->save();
@@ -75,6 +84,19 @@ class PagesController extends Controller
             abort(403, 'Não existe nenhum menu chamando esta página');
         }
 
+    }
+
+    protected function _removeImage($image_remove, $more_images)
+    {
+        $image_removeArray = explode(',', $image_remove);
+        $more_images = explode(',', $more_images);
+        $diferenca = array_diff($more_images, $image_removeArray);
+        if(count($diferenca) > 0){
+            $retorno = implode(',',$diferenca);
+            return $retorno.',';
+        }else{
+            return '';
+        }
     }
 
     protected function _uploadMultImage(Request $request)

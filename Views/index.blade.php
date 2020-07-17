@@ -31,9 +31,9 @@
 <div class="row clearfix">
     <div class="card table-card">             
         <div class="card-body">
-                {{ Form::model($page, ['url' => ['//panel//'.$slug], 'method' => 'POST', 'files' => true ]) }}
+                {{ Form::model($page, ['url' => ['/panel/'.$slug], 'method' => 'POST', 'files' => true ]) }}
                 @csrf
-
+                <input type="hidden" name="image_remove" id="image_remove">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
@@ -78,7 +78,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             {{ Form::label('more_images', 'Imagens adicionais') }}
-                            <input type="file" name="more_images[]" class="multiple_images"  />
+                            <input type="file" name="more_images[]" class="multiple_images" multiple="multiple"  />
                         </div>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
 @section('scriptjs')
 <script>
     $(document).ready(function() {
-        carregaMultiplasImages();
+        carregaMultiplasImages( {!! $page->more_images_json !!} );
     });
 </script>
 @endsection
