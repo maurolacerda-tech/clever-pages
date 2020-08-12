@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Helpers\Functions;
 use App\Models\Menu;
+use App\Models\Language;
 use Modules\Pages\Models\Page;
 
 class PagesController extends Controller
@@ -44,10 +45,11 @@ class PagesController extends Controller
         $images_more = '';        
         $slug = $this->slug;      
         if(!is_null($this->menu_id)){
+            $languages = Language::where('status', 'active')->orderBy('order', 'asc')->get();
             $page = Page::where('menu_id', $this->menu_id)->first();
             if(!$page)
                 $page = new \stdClass;
-            return view('Page::index', compact('page', 'slug', 'combine_filds'));            
+            return view('Page::index', compact('page', 'slug', 'combine_filds', 'languages'));            
         }else{
             abort(403, 'Página não encontrada');
         }
