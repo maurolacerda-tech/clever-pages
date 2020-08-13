@@ -159,7 +159,9 @@
                         </div>
                         @endisset
                     @endif
-                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <div class="col-sm-12 text-right">
+                        <button type="submit" class="btn2 btn-dark ml-2">Atualizar</button>
+                    </div>
                     {{ Form::close() }}
                 </div>
             </div>
@@ -213,19 +215,9 @@
                     </div>
                     @endisset                  
 
-                    @if (isset($combine_filds['slug']) || isset($combine_filds['seo_title']) || isset($combine_filds['meta_description']) || isset($combine_filds['meta_keywords']) )
+                    @if (isset($combine_filds['seo_title']) || isset($combine_filds['meta_description']) || isset($combine_filds['meta_keywords']) )
                         <h6>Meta Tags</h6>
                         <div class="row">
-                            @isset ($combine_filds['slug'])
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    {{ Form::label('slug', $combine_filds['slug'], ['class' => 'form-label']) }} 
-                                    {{ Form::text('slug', null, ['class' => $errors->has('slug') ?  'form-control is-invalid' : 'form-control']) }}                            
-                                    @include('admin.partials._help_block',['field' => 'slug'])
-                                </div>
-                            </div>
-                            @endisset
-
                             @isset ($combine_filds['seo_title'])
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -236,19 +228,17 @@
                             </div>
                             @endisset
 
-                        </div>
-
-                        @isset ($combine_filds['meta_description'])
-                        <div class="row">
-                            <div class="col-sm-12">
+                            @isset ($combine_filds['meta_description'])
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     {{ Form::label('meta_description', $combine_filds['meta_description']) }} 
                                     {{ Form::text('meta_description', null, ['class' => $errors->has('meta_description') ?  'form-control is-invalid' : 'form-control']) }}
                                     @include('admin.partials._help_block',['field' => 'meta_description'])
                                 </div>
                             </div>
+                            @endisset
+
                         </div>
-                        @endisset
 
                         @isset ($combine_filds['meta_keywords'])
                         <div class="row">
@@ -262,7 +252,9 @@
                         </div>
                         @endisset
                     @endif
-                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <div class="col-sm-12 text-right">
+                        <button type="submit" class="btn2 btn-dark ml-2">Atualizar</button>
+                    </div>
                     {{ Form::close() }}
                 </div>
             </div>
