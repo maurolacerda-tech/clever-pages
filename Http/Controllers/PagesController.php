@@ -43,13 +43,14 @@ class PagesController extends Controller
     {  
         $combine_filds = $this->combine_filds;
         $images_more = '';        
-        $slug = $this->slug;      
-        if(!is_null($this->menu_id)){
+        $slug = $this->slug; 
+        $menu_id = $this->menu_id;
+        if(!is_null($menu_id)){
             $languages = Language::where('status', 'active')->orderBy('order', 'asc')->get();
-            $page = Page::where('menu_id', $this->menu_id)->first();
+            $page = Page::where('menu_id', $menu_id)->first();
             if(!$page)
                 $page = new \stdClass;
-            return view('Page::index', compact('page', 'slug', 'combine_filds', 'languages'));            
+            return view('Page::index', compact('page', 'slug', 'combine_filds', 'languages', 'menu_id'));            
         }else{
             abort(403, 'Página não encontrada');
         }
