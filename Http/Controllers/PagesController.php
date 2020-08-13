@@ -25,10 +25,7 @@ class PagesController extends Controller
     {
         $slug = Functions::get_menuslug();
         $menu = Menu::where('slug',$slug)->first();
-        $this->slug = $slug;
-        
-        if( Gate::denies("manager_{$slug}") ) 
-            abort(403, 'Você não tem permissão para gerenciar esta página');
+        $this->slug = $slug;        
 
         $this->folder = config('pages.folder');
         $this->resize = config('pages.resize');
@@ -46,6 +43,9 @@ class PagesController extends Controller
 
     public function index()
     {  
+        if( Gate::denies("manager_{$this->slug}") ) 
+            abort(403, 'Você não tem permissão para gerenciar esta página');
+
         $combine_filds = $this->combine_filds;
         $images_more = '';        
         $slug = $this->slug; 
