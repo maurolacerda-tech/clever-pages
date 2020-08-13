@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use Gate;
 
 use App\Helpers\Functions;
 use App\Models\Menu;
