@@ -25,6 +25,10 @@ class PagesController extends Controller
         $slug = Functions::get_menuslug();
         $menu = Menu::where('slug',$slug)->first();
         $this->slug = $slug;
+        
+        if( Gate::denies("manager_{$slug}") ) 
+            abort(403, 'Você não tem permissão para gerenciar esta página');
+
         $this->folder = config('pages.folder');
         $this->resize = config('pages.resize');
         if($menu){
