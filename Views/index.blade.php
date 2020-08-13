@@ -166,7 +166,10 @@
             @foreach ($languages as $language)
             <div class="tab-pane fade" id="tab-{{$language->code}}" role="tabpanel" aria-labelledby="pills-timeline-tab">
                 <div class="card-body">
-                    {{ Form::open(['route' => 'admin.translations.store']) }}
+                    @php
+                        $colectionTranslation = $language->translation($menu_id, $page->id);
+                    @endphp
+                    {{ Form::model($colectionTranslation, ['route' => ['admin.translations.store'], 'method' => 'POST']) }}
                     @csrf
                     <input type="hidden" name="image_remove" id="image_remove">
                     <input type="hidden" name="menu_id" value="{{$menu_id}}">
